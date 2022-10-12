@@ -11,10 +11,10 @@
 <body id="app">
 	<div class="container my-4" :style="{'--primary-color': config.primaryColor, '--secondary-color': config.secondaryColor, '--text-color': config.textColor}">
         <div class="row main-wrapper">
-            <div class="col-4 left-col">
+            <div class="left-col" :style="{width: config.widthLeft}">
                 <div class="left-col__personal-wrapper">
                     <div class="img-wrapper mb-4">
-                        <img src="profile-pic-square.jpg">
+                        <img :src="config.imageUrl">
                     </div>
                     <h5 class="left-col__headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'personal')">{{config.headlines.personal}}</h5>
                     <div class="d-flex align-items-center">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8 right-col">
+            <div class="right-col" :style="{width: config.widthRight}">
                 <h3 class="right-col__main-headline pb-3 mb-0">
                     <input class="pseudo-text-input w-100" type="text" v-model="config.name" :value="config.name">
                 </h3>
@@ -104,28 +104,46 @@
     </div>
     <div class="sidebar" @mouseenter="sidebarOpen" ref="sidebar">
         <button class="btn btn-close-sidebar" @click="sidebarClose">
-            <img src="close-icon.svg" alt="close icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
+            <!-- <img src="close-icon.svg" alt="close icon"> -->
         </button>
-        <label class="d-flex align-items-center mr-4">
-            <input type="color" class="mr-2 colorpicker" v-model="config.primaryColor" :value="config.primaryColor">
-            Primary color
-        </label>
-        <label class="d-flex align-items-center mr-4">
-            <input type="color" class="mr-2 colorpicker" v-model="config.secondaryColor">
-            Secondary color
-        </label>
-        <label class="d-flex align-items-center mr-4">
-            <input type="color" class="mr-2 colorpicker" v-model="config.textColor">
-            Text color
-        </label>
-        
-        <div class="mt-4 p-2 border-radius-2" style="background-color: white">
-            <input type="file" id="selected-file">
+        <div class="sidebar-inner">
+            <label class="d-flex align-items-center">
+                <input type="color" class="mr-2 colorpicker" v-model="config.primaryColor" :value="config.primaryColor">
+                Primary color
+            </label>
+            <label class="d-flex align-items-center">
+                <input type="color" class="mr-2 colorpicker" v-model="config.secondaryColor">
+                Secondary color
+            </label>
+            <label class="d-flex align-items-center">
+                <input type="color" class="mr-2 colorpicker" v-model="config.textColor">
+                Text color
+            </label>
+
+            <label class="d-flex align-items-center">
+                <input type="text" class="custom-control mr-2" width="70px" style="width:70px;" v-model="config.widthLeft" :value="config.widthLeft">
+                Width left column
+            </label>
+
+            <label class="d-flex align-items-center">
+                <input type="text" class="custom-control mr-2" width="70px" style="width:70px;" v-model="config.widthRight" :value="config.widthRight">
+                Width right column
+            </label>
+
+            <label class="p-2 border-radius-2">
+                Upload photo
+                <input class="mt-1" type="file" accept="image/jpeg, image/png, image/jpg" @change="changeImage">
+            </label>
+            
+            <label class="p-2 border-radius-2">
+                Upload configuration
+                <input class="mt-1" type="file" @change="useConfig">
+            </label>
         </div>
 
-        <button class="btn btn-block btn-secondary mt-4" @click="useConfig">Use uploaded configuration</button>
 
-        <button class="btn btn-block btn-success mr-2 mt-4" @click="saveConfig">Save configuration</button>
+        <button class="btn btn-block btn-success mr-2 mt-4" @click="saveConfig">Download configuration</button>
     </div>
     <script>
         Vue.createApp({
@@ -135,9 +153,12 @@
                         primaryColor: "#8C7D69",
                         secondaryColor: "#F5F5F5",
                         textColor: "#323232",
+                        widthLeft: "30%",
+                        widthRight: "70%",
+                        imageUrl: "profile_pic.jpg",
                         qualifications: ["dance", "art"],
                         name: "Moni Mustermann",
-                        title: "Master of Science Psychology",
+                        title: "Senior Marketing Manager",
                         headlines: {
                             personal: "About",
                             qualifications: "Qualifications",
@@ -147,12 +168,11 @@
                         experiences: [
                             {
                                 date: "01/2021 – now",
-                                role: "Full Stack Web Developer",
-                                company: "Solution 360 GmbH, Berlin",
+                                role: "Junior Sales Agent",
+                                company: "Amazing Company AG, NYC",
                                 descriptionItems: [
-                                    "Frontend and backend development of Ecommerce shops",
-                                    "Shopware 6 with Twig, Bootstrap, Javascript & Vue.Js, PHP & Symfony",
-                                    "Customized and extended shop functionalities with Shopware Plugins"
+                                    "Increased revenue by 300 percent",
+                                    "Improved customer relations by implementing novel strategies"
                                 ]
                             }
                         ],
@@ -203,10 +223,10 @@
                     this.config.education.push(
                         {
                             date: "Spain, 02/2021 – 08/2023",
-                            institution: "Universität de Barcelona",
+                            institution: "University of Barcelona",
                             title: "Psychology, Master of Science",
                             descriptionItems: [
-                                "summa cum laude, GPA 1.5",
+                                "cum laude, GPA 1.5",
                                 "Relevant coursework includes: Mastering resume building"
                             ]
                         }
@@ -216,10 +236,11 @@
                     this.config.experiences.push(
                         {
                             date: "from - til",
-                            role: "Role",
-                            company: "Company, location",
+                            role: "Junior Sales Agent",
+                            company: "Amazing Company AG, NYC",
                             descriptionItems: [
-                                "what I did there"
+                                "Increased revenue by 300 percent",
+                                "Improved customer relations by implementing novel strategies"
                             ]
                         }
                     );
@@ -235,20 +256,30 @@
                     a.href = window.URL.createObjectURL(blob);
                     a.click();
                 },
-                useConfig(){
-                    const files = document.getElementById("selected-file").files;
+                useConfig(e){
+                    const files = e.target.files;
                     if (files.length <= 0) {
                         return false;
                     }
-
                     const fr = new FileReader();
-
                     fr.addEventListener('load', () => {
                         const result = JSON.parse(fr.result);
                         this.config = result;
                     })
 
                     fr.readAsText(files.item(0));
+                },
+                changeImage(e){
+                    const files = e.target.files;
+                    if (files.length <= 0) {
+                        return false;
+                    }
+                    const fr = new FileReader();
+                    fr.addEventListener("load", () => {
+                        const uploaded_image = fr.result;
+                        this.config.imageUrl = uploaded_image;
+                    });
+                    fr.readAsDataURL(files.item(0));
                 },
                 onFinishEditHeadline(e, key){
                     this.config.headlines[key] = e.target.innerText;

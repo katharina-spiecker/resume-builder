@@ -189,6 +189,12 @@ img {
     background-color: rgb(230, 230, 230);
 }
 
+.sidebar-inner {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+}
+
 .sidebar-hide {
     animation-name: sidebarHide;
     animation-duration: 2s;
@@ -208,7 +214,7 @@ img {
     align-items: center;
 }
 
-.btn-close-sidebar img {
+.btn-close-sidebar svg {
     height: 100%;
     width: 100%;
     object-fit: contain;
