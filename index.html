@@ -11,7 +11,7 @@
 <body id="app">
 	<div class="container my-4" :style="{'--primary-color': config.primaryColor, '--secondary-color': config.secondaryColor, '--text-color': config.textColor}">
         <div class="row main-wrapper">
-            <div class="left-col" :style="{width: config.widthLeft}">
+            <div class="left-col" :style="{width: widthLeft}">
                 <div class="left-col__personal-wrapper">
                     <div class="img-wrapper mb-4">
                         <img :src="config.imageUrl">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="right-col" :style="{width: config.widthRight}">
+            <div class="right-col" :style="{width: widthRight}">
                 <h3 class="right-col__main-headline pb-3 mb-0">
                     <input class="pseudo-text-input w-100" type="text" v-model="config.name" :value="config.name">
                 </h3>
@@ -122,13 +122,8 @@
             </label>
 
             <label class="d-flex align-items-center">
-                <input type="text" class="custom-control mr-2" width="70px" style="width:70px;" v-model="config.widthLeft" :value="config.widthLeft">
+                <input type="number" min="20" max="80" class="custom-control mr-2" style="width:70px;" v-model="config.widthLeft" :value="config.widthLeft">
                 Width left column
-            </label>
-
-            <label class="d-flex align-items-center">
-                <input type="text" class="custom-control mr-2" width="70px" style="width:70px;" v-model="config.widthRight" :value="config.widthRight">
-                Width right column
             </label>
 
             <label class="p-2 border-radius-2">
@@ -138,7 +133,7 @@
             
             <label class="p-2 border-radius-2">
                 Upload configuration
-                <input class="mt-1" type="file" @change="useConfig">
+                <input class="mt-1" type="file" accept=".json" @change="useConfig">
             </label>
         </div>
 
@@ -153,8 +148,7 @@
                         primaryColor: "#8C7D69",
                         secondaryColor: "#F5F5F5",
                         textColor: "#323232",
-                        widthLeft: "30%",
-                        widthRight: "70%",
+                        widthLeft: "30",
                         imageUrl: "profile_pic.jpg",
                         qualifications: ["dance", "art"],
                         name: "Moni Mustermann",
@@ -195,6 +189,14 @@
                         }
                     },
                     isEditable: false
+                }
+            },
+            computed: {
+                widthRight(){
+                    return (100 - this.config.widthLeft) + "%";
+                },
+                widthLeft(){
+                    return this.config.widthLeft + "%";
                 }
             },
             methods: {
