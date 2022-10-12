@@ -27,6 +27,13 @@ h6 input, h1, h2, h3, h4, h5, h6 {
     padding-left: 30px !important;
 }
 
+.left-col__personal-wrapper svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    fill: var(--primary-color);
+}
+
 .left-col__headline, .right-col h3 {
     border-bottom: 1px solid var(--primary-color);
     color: var(--primary-color);
@@ -190,13 +197,21 @@ img {
 }
 
 .btn-close-sidebar {
-    border-radius: 50%;
     padding: 0;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     position: absolute;
     top: 10px;
     left: 10px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.btn-close-sidebar img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
 }
 
 .sidebar-show {
