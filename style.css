@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: #fff;
 }
 
 .container {
@@ -96,10 +96,6 @@ h6 input, h1, h2, h3, h4, h5, h6 {
     margin-left: 25px;
 }
 
-/* ul {
-    margin-bottom: 3px;
-} */
-
 .pseudo-text-input {
     background-color: transparent;
     border: none;
@@ -172,4 +168,59 @@ img {
 	height: 50px;
 	object-fit: contain;
 	margin-right: 10px;
+}
+
+.sidebar {
+    height: 100%;
+    width: 400px;
+    position: fixed;
+    right: -350px;
+    top: 0;
+    padding: 20px;
+    padding-top: 60px;
+    padding-left: 30px;
+    background-color: rgb(230, 230, 230);
+}
+
+.sidebar-hide {
+    animation-name: sidebarHide;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.btn-close-sidebar {
+    border-radius: 50%;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.sidebar-show {
+    animation-name: sidebarShow;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes sidebarHide {
+    0% {
+        right: 0;
+    }
+    100% {
+        right: -350px;
+    }
+}
+
+/* needed? */
+@keyframes sidebarShow {
+    0% {
+        right: -350px;
+    }
+    100% {
+        right: 0;
+    }
 }

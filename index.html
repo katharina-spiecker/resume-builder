@@ -10,25 +10,6 @@
 </head>
 <body id="app">
 	<div class="container my-4" :style="{'--primary-color': config.primaryColor, '--secondary-color': config.secondaryColor, '--text-color': config.textColor}">
-        <div class="row">
-            <div class="col-12 edit-bar d-flex align-items-center mb-4">
-                <label class="d-flex align-items-center mr-4">Primary color
-                    <input type="color" class="ml-2 colorpicker" v-model="config.primaryColor">
-                </label>
-                <label class="d-flex align-items-center mr-4">Secondary color
-                    <input type="color" class="ml-2 colorpicker" v-model="config.secondaryColor">
-                </label>
-                <label class="d-flex align-items-center mr-4">Text color
-                    <input type="color" class="ml-2 colorpicker" v-model="config.textColor">
-                </label>
-                <button class="btn btn-primary mr-2" @click="isEditable = !isEditable">{{isEditable ? 'Hide' : 'Show'}} buttons</button>
-            </div>
-            <div class="col-12 mb-4" style="color: #fff">
-                <button class="btn btn-success mr-2" @click="saveConfig">Save configuration</button>
-                <input type="file" id="selected-file">
-                <button class="btn btn-info" @click="useConfig">Use uploaded configuration</button>
-            </div>
-        </div>
         <div class="row main-wrapper">
             <div class="col-4 left-col">
                 <div>
@@ -112,14 +93,37 @@
             </div>
         </div>
     </div>
+    <div class="sidebar" @mouseenter="sidebarOpen" ref="sidebar">
+        <button class="btn btn-close-sidebar" @click="sidebarClose">x</button>
+        <label class="d-flex align-items-center mr-4">
+            <input type="color" class="mr-2 colorpicker" v-model="config.primaryColor" :value="config.primaryColor">
+            Primary color
+        </label>
+        <label class="d-flex align-items-center mr-4">
+            <input type="color" class="mr-2 colorpicker" v-model="config.secondaryColor">
+            Secondary color
+        </label>
+        <label class="d-flex align-items-center mr-4">
+            <input type="color" class="mr-2 colorpicker" v-model="config.textColor">
+            Text color
+        </label>
+        
+        <div class="mt-4 p-2 border-radius-2" style="background-color: white">
+            <input type="file" id="selected-file">
+        </div>
+
+        <button class="btn btn-block btn-secondary mt-4" @click="useConfig">Use uploaded configuration</button>
+
+        <button class="btn btn-block btn-success mr-2 mt-4" @click="saveConfig">Save configuration</button>
+    </div>
     <script>
         Vue.createApp({
             data() {
                 return {
                     config: {
-                        primaryColor: "rgb(140, 125, 105)",
-                        secondaryColor: "rgb(245, 245, 245)",
-                        textColor: "rgb(50, 50, 50)",
+                        primaryColor: "#8C7D69",
+                        secondaryColor: "#F5F5F5",
+                        textColor: "#323232",
                         qualifications: ["dance", "art"],
                         name: "Moni Mustermann",
                         title: "Master of Science Psychology",
@@ -237,6 +241,16 @@
                 },
                 onFinishEditHeadline(e, key){
                     this.config.headlines[key] = e.target.innerText;
+                },
+                sidebarClose(e){
+                    this.$refs.sidebar.classList.remove("sidebar-show");
+                    this.$refs.sidebar.classList.add("sidebar-hide");
+                    this.isEditable = false;
+                },
+                sidebarOpen(e){
+                    event.target.classList.remove("sidebar-hide");
+                    event.target.classList.add("sidebar-show");
+                    this.isEditable = true;
                 }
             }
         }).mount('#app')
