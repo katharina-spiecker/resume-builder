@@ -38,8 +38,20 @@
                         </li>
                     </ul>
                     <div class="btn-wrapper mb-3" :class="[isEditable ? 'd-block' : 'd-none']">
-                        <button v-if="config.qualifications[0]" class="btn btn-danger btn-remove mr-2" @click="removeQualification">-</button>
+                        <button v-if="config.qualifications[0]" class="btn btn-danger btn-remove mr-2" @click="generalRemove('qualifications')">-</button>
                         <button class="btn btn-secondary btn-add" @click="addQualification">+</button>
+                    </div>
+                </div>
+                <div id="languages-section" class="mt-3">
+                    <h5 class="left-col__headline" contenteditable="true">{{config.headlines.language}}</h5>
+                    <ul>
+                        <li v-for="(language, index) in config.languages">
+                            <input class="pseudo-text-input w-100" type="text" v-model="config.languages[index].name">
+                        </li>
+                    </ul>
+                    <div class="btn-wrapper mb-3" :class="[isEditable ? 'd-block' : 'd-none']">
+                        <button v-if="config.languages[0]" class="btn btn-danger btn-remove mr-2"  @click="generalRemove('languages')">-</button>
+                        <button class="btn btn-secondary btn-add" @click="addLanguage">+</button>
                     </div>
                 </div>
             </div>
@@ -143,10 +155,6 @@
                 Upload configuration
                 <input class="mt-1" type="file" accept=".json" @change="useConfig">
             </label>
-
-            <button class="btn btn-success" id="savepdf">
-                Save PDF
-            </button>
         </div>
 
 

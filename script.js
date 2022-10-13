@@ -7,7 +7,7 @@ Vue.createApp({
 				textColor: "#323232",
 				widthLeft: "30",
 				imageUrl: "profile_pic.jpg",
-				imageShape: "square",
+				imageShape: "round",
 				qualifications: ["dance", "art"],
 				name: "Moni Mustermann",
 				title: "Senior Marketing Manager",
@@ -15,7 +15,8 @@ Vue.createApp({
 					personal: "About",
 					qualifications: "Qualifications",
 					experience: "Experience",
-					education: "Education"
+					education: "Education",
+					language: "Language"
 				},
 				experiences: [
 					{
@@ -44,7 +45,21 @@ Vue.createApp({
 					phone: "015773909584",
 					email: "contact@gmail.com",
 					address: "Hauptstraße 100, 19777 Berlin"
-				}
+				},
+				languages: [
+					{
+						name: "German",
+						points: 5
+					},
+					{
+						name: "English",
+						points: 5
+					},
+					{
+						name: "French",
+						points: 3
+					}
+				]
 			},
 			isEditable: false
 		}
@@ -105,8 +120,14 @@ Vue.createApp({
 				}
 			);
 		},
-		removeExperience(){
-			this.config.experiences.pop();
+		addLanguage(){
+			this.config.languages.push({
+				name: "German",
+				points: 5
+			});
+		},
+		generalRemove(name){
+			this.config[name].pop();
 		},
 		saveConfig(){
 			const data = JSON.stringify(this.config)
@@ -154,5 +175,6 @@ Vue.createApp({
 			event.target.classList.add("sidebar-show");
 			this.isEditable = true;
 		}
+		// window.jspdf.jsPdf
 	}
 }).mount('#app')

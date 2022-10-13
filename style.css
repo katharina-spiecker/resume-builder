@@ -108,7 +108,7 @@ h6 input, h1, h2, h3, h4, h5, h6 {
     border: none;
 }
 
-#qualifications-section ul {
+#qualifications-section ul, #languages-section ul {
     padding-left: 20px;
 }
 
