@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap');
 
 .spacer {
 	margin-top: 20px;
@@ -64,6 +64,10 @@ h6 input, h1, h2, h3, h4, h5, h6 {
 .right-col__section-headline {
     color: var(--primary-color);
     margin-bottom: 15px;
+}
+
+.right-col__section-headline, .left-col__headline, .right-col__main-headline input {
+    font-weight: var(--headline-thickness);
 }
 
 .right-col__sub-headline {

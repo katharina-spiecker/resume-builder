@@ -7,7 +7,8 @@ Vue.createApp({
 				textColor: "#323232",
 				widthLeft: "30",
 				imageUrl: "profile_pic.jpg",
-				imageShape: "round",
+                imageShape: "round",
+                headlineThickness: "400",
 				qualifications: ["dance", "art"],
 				name: "Moni Mustermann",
 				title: "Senior Marketing Manager",
@@ -61,9 +62,17 @@ Vue.createApp({
 					}
 				]
 			},
-			isEditable: false
+            isEditable: false,
+            hideSidebar: false
 		}
-	},
+    },
+    mounted(){
+        document.addEventListener('keypress', (event) => {
+            if(event.code == "Space"){
+                this.hideSidebar = !this.hideSidebar;
+            }
+        }, false);
+    },
 	computed: {
 		widthRight(){
 			return (100 - this.config.widthLeft) + "%";
