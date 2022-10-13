@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap");
 
 .spacer {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 body {
@@ -12,15 +12,20 @@ body {
     color: var(--text-color);
 }
 
-h6 input, h1, h2, h3, h4, h5, h6 {
-    font-family: 'Quicksand', sans-serif;
+h6 input,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Quicksand", sans-serif;
     text-transform: uppercase;
 }
 
 .left-col {
     background-color: var(--secondary-color);
     border-right: 1px solid var(--primary-color);
-    border-radius: 30px 0 0 30px;
     padding-top: 30px;
     padding-bottom: 30px;
     padding-right: 0 !important;
@@ -34,7 +39,8 @@ h6 input, h1, h2, h3, h4, h5, h6 {
     fill: var(--primary-color);
 }
 
-.left-col__headline, .right-col h3 {
+.left-col__headline,
+.right-col h3 {
     border-bottom: 1px solid var(--primary-color);
     color: var(--primary-color);
 }
@@ -49,7 +55,7 @@ h6 input, h1, h2, h3, h4, h5, h6 {
     padding-left: 30px;
 }
 
-.right-col__main-headline input{
+.right-col__main-headline input {
     color: var(--primary-color);
     text-transform: uppercase;
 }
@@ -66,7 +72,9 @@ h6 input, h1, h2, h3, h4, h5, h6 {
     margin-bottom: 15px;
 }
 
-.right-col__section-headline, .left-col__headline, .right-col__main-headline input {
+.right-col__section-headline,
+.left-col__headline,
+.right-col__main-headline input {
     font-weight: var(--headline-thickness);
 }
 
@@ -74,7 +82,8 @@ h6 input, h1, h2, h3, h4, h5, h6 {
     margin-bottom: 8px;
 }
 
-.btn-add, .btn-remove {
+.btn-add,
+.btn-remove {
     border-radius: 50%;
     height: 30px;
     width: 30px;
@@ -112,7 +121,8 @@ h6 input, h1, h2, h3, h4, h5, h6 {
     border: none;
 }
 
-#qualifications-section ul, #languages-section ul {
+#qualifications-section ul,
+#languages-section ul {
     padding-left: 20px;
 }
 
@@ -133,51 +143,54 @@ input {
     padding-bottom: 2px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     color: var(--color-primary);
 }
 
 .card {
-	background-color: #fff;
-	border-radius: 15px;
-	height: 100%;
+    background-color: #fff;
+    border-radius: 15px;
+    height: 100%;
 }
 
 .row {
-	margin-left: -10px;
-	margin-right: -10px;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 
 [class*="col-"] {
-	padding-left: 10px;
-	padding-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .img-wrapper {
-	width: 200px;
-	height: 200px;
+    width: 200px;
+    height: 200px;
     overflow: hidden;
 }
 
 .img-wrapper img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	/* object-position: 50% 20%; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* object-position: 50% 20%; */
 }
 
-.linked-in-badge, .free-code-camp {
-	width: 20px;
-	height: 20px;
-	object-fit: contain;
-	margin-right: 5px;
+.linked-in-badge,
+.free-code-camp {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-right: 5px;
 }
 
 .logo-icon {
-	width: 50px;
-	height: 50px;
-	object-fit: contain;
-	margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-right: 10px;
 }
 
 .sidebar {
