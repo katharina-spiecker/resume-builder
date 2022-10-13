@@ -152,15 +152,14 @@ h1, h2, h3 {
 .img-wrapper {
 	width: 200px;
 	height: 200px;
-	border-radius: 50%;
-	overflow: hidden;
+    overflow: hidden;
 }
 
-img {
+.img-wrapper img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	object-position: 50% 20%;
+	/* object-position: 50% 20%; */
 }
 
 .linked-in-badge, .free-code-camp {
