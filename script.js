@@ -70,7 +70,8 @@ Vue.createApp({
         document.addEventListener(
             "keypress",
             (event) => {
-                if (event.code == "Space") {
+				console.log(event.code)
+                if (event.code == "Enter") {
                     this.hideSidebar = !this.hideSidebar;
                 }
             },
