@@ -164,13 +164,10 @@
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    //HelloWorld
-  },
+  components: {},
   data() {
         return {
             config: {
@@ -178,7 +175,7 @@ export default {
                 secondaryColor: "#F5F5F5",
                 textColor: "#323232",
                 widthLeft: "30",
-                imageUrl: "../../src/assets/profile_pic.jpg",
+                imageUrl: "/media/profile_pic.jpg",
                 imageShape: "round",
                 headlineThickness: "400",
                 qualifications: ["dance", "art"],
