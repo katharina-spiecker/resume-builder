@@ -1,6 +1,6 @@
 <template>
   <div class="container my-4" :style="cssVariables">
-        <button class="btn btn btn-success mb-4" id="export-pdf-btn">Export pdf</button>
+        <!-- <button class="btn btn btn-success mb-4" id="export-pdf-btn">Export pdf</button> -->
         <div class="row main-wrapper">
             <div class="left-col" :style="{width: widthLeft}">
                 <div class="left-col__personal-wrapper">
@@ -358,14 +358,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

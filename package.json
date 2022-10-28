@@ -14,11 +14,8 @@
   },
   "main": "script.js",
   "dependencies": {
-    "core-js": "^3.8.3",
-    "jspdf": "^2.5.1",
     "vue": "^3.2.13",
-    "vue-cli": "^2.9.6",
-    "vue-html2pdf": "^1.8.0"
+    "vue-cli": "^2.9.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
