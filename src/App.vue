@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Digital Resume</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-</head>
-<body id="app">
-    <div class="container my-4"
-    :style="{'--primary-color': config.primaryColor, '--secondary-color': config.secondaryColor, '--text-color': config.textColor, '--headline-thickness': config.headlineThickness}">
+<template>
+  <div class="container my-4" :style="cssVariables">
+        <button class="btn btn btn-success mb-4" id="export-pdf-btn">Export pdf</button>
         <div class="row main-wrapper">
             <div class="left-col" :style="{width: widthLeft}">
                 <div class="left-col__personal-wrapper">
@@ -34,7 +24,7 @@
                 <div id="qualifications-section" class="mt-5">
                     <h5 class="left-col__headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'qualifications')">{{config.headlines.qualifications}}</h5>
                     <ul>
-                        <li v-for="(qualification, index) in config.qualifications">
+                        <li v-for="(qualification, index) in config.qualifications" :key="index">
                             <input class="pseudo-text-input w-100" type="text" v-model="config.qualifications[index]">
                         </li>
                     </ul>
@@ -46,7 +36,7 @@
                 <div id="languages-section" class="mt-5">
                     <h5 class="left-col__headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'language')">{{config.headlines.language}}</h5>
                     <ul>
-                        <li v-for="(language, index) in config.languages">
+                        <li v-for="(language, index) in config.languages" :key="index">
                             <input class="pseudo-text-input w-100" type="text" v-model="config.languages[index].name">
                         </li>
                     </ul>
@@ -65,7 +55,7 @@
                 </h5>
                 <div>
                     <h4 class="right-col__section-headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'experience')">{{config.headlines.experience}}</h4>
-                    <div class="card-text" v-for="(experience, index) in config.experiences">
+                    <div class="card-text" v-for="(experience, index) in config.experiences" :key="index">
                         <h6 class="right-col__sub-headline">
                             <input class="pseudo-text-input w-100" type="text" v-model="config.experiences[index].role">
                         </h6>
@@ -74,7 +64,7 @@
                             <input class="pseudo-text-input ml-auto w-50 text-right" type="text" v-model="config.experiences[index].date">
                         </div>
                         <ul>
-                            <li v-for="(item, i) in experience.descriptionItems">
+                            <li v-for="(item, i) in experience.descriptionItems" :key="i">
                                 <input class="pseudo-text-input w-100" type="text" v-model="config.experiences[index].descriptionItems[i]">
                             </li>
                         </ul>
@@ -89,7 +79,7 @@
                     </div>
 
                     <h4 class="mt-4 right-col__section-headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'education')">{{config.headlines.education}}</h4>
-                    <div class="card-text" v-for="(item, index) in config.education">
+                    <div class="card-text" v-for="(item, index) in config.education" :key="index">
                         <h6 class="right-col__sub-headline">
                             <input class="pseudo-text-input w-100" type="text" v-model="config.education[index].title">
                         </h6>
@@ -98,7 +88,7 @@
                             <input class="pseudo-text-input w-50 text-right" type="text" v-model="config.education[index].date">
                         </div>
                         <ul>
-                            <li v-for="(desc, i) in item.descriptionItems">
+                            <li v-for="(desc, i) in item.descriptionItems" :key="i">
                                 <input class="pseudo-text-input w-100" type="text" v-model="config.education[index].descriptionItems[i]">
                             </li>
                         </ul>
@@ -120,9 +110,6 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
         </button>
         <div class="sidebar-inner">
-            <p class="mb-4">To export as a pdf, first hide this sidebar by clicking the Enter key on your keyboard. Press the same key again, if you want to show it again.
-                Use the export as pdf function of your browser, e.g. Safari: Click file > Export as pdf.
-            </p>
             
             <label class="d-flex align-items-center">
                 <input type="color" class="mr-2 colorpicker" v-model="config.primaryColor">
@@ -172,8 +159,216 @@
             </label>
         </div>
 
-        <button class="btn btn-block btn-success mr-2 mt-4" @click="saveConfig">Download configuration</button>
+        <button class="btn btn-block btn-success mt-4" @click="saveConfig">Download configuration</button>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+</template>
+
+<script>
+//import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'App',
+  components: {
+    //HelloWorld
+  },
+  data() {
+        return {
+            config: {
+                primaryColor: "#8C7D69",
+                secondaryColor: "#F5F5F5",
+                textColor: "#323232",
+                widthLeft: "30",
+                imageUrl: "../../src/assets/profile_pic.jpg",
+                imageShape: "round",
+                headlineThickness: "400",
+                qualifications: ["dance", "art"],
+                name: "Moni Mustermann",
+                title: "Senior Marketing Manager",
+                headlines: {
+                    personal: "About",
+                    qualifications: "Qualifications",
+                    experience: "Experience",
+                    education: "Education",
+                    language: "Language",
+                },
+                experiences: [
+                    {
+                        date: "01/2021 – now",
+                        role: "Junior Sales Agent",
+                        company: "Amazing Company AG, NYC",
+                        descriptionItems: [
+                            "Increased revenue by 300 percent",
+                            "Improved customer relations by implementing novel strategies",
+                        ],
+                    },
+                ],
+                education: [
+                    {
+                        date: "02/2020 – 08/2020",
+                        institution: "Universität de Barcelona, Spain",
+                        title: "Psychology, Bachelor of Science",
+                        descriptionItems: [
+                            "summa cum laude, GPA 1.3",
+                            "Speaker of class",
+                            "Relevant coursework includes: Mastering resume building",
+                        ],
+                    },
+                ],
+                contact: {
+                    phone: "015773909584",
+                    email: "contact@gmail.com",
+                    address: "Hauptstraße 100, 19777 Berlin",
+                },
+                languages: [
+                    {
+                        name: "German",
+                        points: 5,
+                    },
+                    {
+                        name: "English",
+                        points: 5,
+                    },
+                    {
+                        name: "French",
+                        points: 3,
+                    },
+                ],
+            },
+            isEditable: false,
+            hideSidebar: false,
+        };
+  },
+  computed: {
+      widthRight() {
+          return 100 - this.config.widthLeft + "%";
+      },
+      widthLeft() {
+          return this.config.widthLeft + "%";
+      },
+      cssVariables(){
+          return {
+              '--primary-color': this.config.primaryColor,
+              '--secondary-color': this.config.secondaryColor,
+              '--text-color': this.config.textColor,
+              '--headline-thickness': this.config.headlineThickness
+          }
+      }
+  },
+  methods: {
+      addQualification() {
+          this.config.qualifications.push("new entry");
+      },
+      removeQualification() {
+          this.config.qualifications.pop();
+      },
+      removeEducationDescItem(index) {
+          this.config.education[index].descriptionItems.pop();
+      },
+      addEducationDescItem(index) {
+          this.config.education[index].descriptionItems.push("neuer Eintrag");
+      },
+      removeExperienceItem(index) {
+          this.config.experiences[index].descriptionItems.pop();
+      },
+      addExperienceItem(index) {
+          this.config.experiences[index].descriptionItems.push(
+              "neuer Eintrag"
+          );
+      },
+      removeEducationItem() {
+          this.config.education.pop();
+      },
+      addEducationItem() {
+          this.config.education.push({
+              date: "Spain, 02/2021 – 08/2023",
+              institution: "University of Barcelona",
+              title: "Psychology, Master of Science",
+              descriptionItems: [
+                  "cum laude, GPA 1.5",
+                  "Relevant coursework includes: Mastering resume building",
+              ],
+          });
+      },
+      addExperience() {
+          this.config.experiences.push({
+              date: "from - til",
+              role: "Junior Sales Agent",
+              company: "Amazing Company AG, NYC",
+              descriptionItems: [
+                  "Increased revenue by 300 percent",
+                  "Improved customer relations by implementing novel strategies",
+              ],
+          });
+      },
+      addLanguage() {
+          this.config.languages.push({
+              name: "German",
+              points: 5,
+          });
+      },
+      generalRemove(name) {
+          this.config[name].pop();
+      },
+      saveConfig() {
+          const data = JSON.stringify(this.config);
+          const blob = new Blob([data], { type: "text/plain" });
+          let a = document.createElement("a");
+          a.download = "resume_configuration.json";
+          a.href = window.URL.createObjectURL(blob);
+          a.click();
+      },
+      useConfig(e) {
+          const files = e.target.files;
+          if (files.length <= 0) {
+              return false;
+          }
+          const fr = new FileReader();
+          fr.addEventListener("load", () => {
+              const result = JSON.parse(fr.result);
+              this.config = result;
+          });
+
+          fr.readAsText(files.item(0));
+      },
+      changeImage(e) {
+          const files = e.target.files;
+          if (files.length <= 0) {
+              return false;
+          }
+          const fr = new FileReader();
+          fr.addEventListener("load", () => {
+              const uploaded_image = fr.result;
+              this.config.imageUrl = uploaded_image;
+          });
+          fr.readAsDataURL(files.item(0));
+      },
+      onFinishEditHeadline(e, key) {
+          this.config.headlines[key] = e.target.innerText;
+      },
+      sidebarClose() {
+          this.$refs.sidebar.classList.remove("sidebar-show");
+          this.$refs.sidebar.classList.add("sidebar-hide");
+          this.isEditable = false;
+      },
+      sidebarOpen() {
+          event.target.classList.remove("sidebar-hide");
+          event.target.classList.add("sidebar-show");
+          this.isEditable = true;
+      },
+      printExport(){
+          console.log("printExport")
+      }
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
