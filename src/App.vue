@@ -20,10 +20,14 @@
                             <input class="pseudo-text-input w-100" type="text" v-model="config.qualifications[index]">
                         </li>
                     </ul>
-                    <div class="btn-wrapper mb-3" :class="[isEditable ? 'd-block' : 'd-none']">
-                        <button v-if="config.qualifications[0]" class="btn btn-danger btn-remove mr-2" @click="generalRemove('qualifications')">-</button>
-                        <button class="btn btn-secondary btn-add" @click="addQualification">+</button>
-                    </div>
+
+                    <EditButtons v-if="isEditable"
+                        :showRemoveBtn="config.qualifications[0] ? true: false"
+                        buttonType="large"
+                        @removeClicked="generalRemove('qualifications')"
+                        @addClicked="addQualification">
+                    </EditButtons>
+
                 </div>
                 <div id="languages-section" class="mt-5">
                     <h5 class="left-col__headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'language')">{{config.headlines.language}}</h5>
@@ -32,10 +36,13 @@
                             <input class="pseudo-text-input w-100" type="text" v-model="config.languages[index].name">
                         </li>
                     </ul>
-                    <div class="btn-wrapper mb-3" :class="[isEditable ? 'd-block' : 'd-none']">
-                        <button v-if="config.languages[0]" class="btn btn-danger btn-remove mr-2"  @click="generalRemove('languages')">-</button>
-                        <button class="btn btn-secondary btn-add" @click="addLanguage">+</button>
-                    </div>
+
+                    <EditButtons v-if="isEditable"
+                        :showRemoveBtn="config.languages[0] ? true: false"
+                        buttonType="large"
+                        @removeClicked="generalRemove('languages')"
+                        @addClicked="addLanguage">
+                    </EditButtons>
                 </div>
             </div>
             <div class="right-col" :style="{width: widthRight}">
@@ -60,15 +67,19 @@
                                 <input class="pseudo-text-input w-100" type="text" v-model="config.experiences[index].descriptionItems[i]">
                             </li>
                         </ul>
-                        <div class="btn-wrapper-small mb-3" :class="[isEditable ? 'd-block' : 'd-none']">
-                            <button v-if="experience.descriptionItems[0]" class="btn btn-danger btn-remove mr-2" @click="removeExperienceItem(index)">-</button>
-                            <button class="btn btn-secondary btn-add" @click="addExperienceItem(index)">+</button>
-                        </div>
+
+                        <EditButtons v-if="isEditable" :showRemoveBtn="experience.descriptionItems[0] ? true: false"
+                            buttonType="small"
+                            @removeClicked="removeExperienceItem(index)"
+                            @addClicked="addExperienceItem(index)">
+                        </EditButtons>
                     </div>
-                    <div class="btn-wrapper mb-3" :class="[isEditable ? 'd-block' : 'd-none']">
-                        <button v-if="config.experiences[0]" class="btn btn-danger btn-remove mr-2" @click="generalRemove('experiences')">-</button>
-                        <button class="btn btn-secondary btn-add" @click="addExperience(index)">+</button>
-                    </div>
+
+                    <EditButtons v-if="isEditable" :showRemoveBtn="config.experiences[0] ? true: false"
+                        buttonType="large"
+                        @removeClicked="generalRemove('experiences')"
+                        @addClicked="addExperience(index)">
+                   </EditButtons>
 
                     <h4 class="mt-4 right-col__section-headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'education')">{{config.headlines.education}}</h4>
                     <div class="card-text" v-for="(item, index) in config.education" :key="index">
@@ -84,15 +95,21 @@
                                 <input class="pseudo-text-input w-100" type="text" v-model="config.education[index].descriptionItems[i]">
                             </li>
                         </ul>
-                        <div class="btn-wrapper-small mb-3" :class="[isEditable ? 'd-block' : 'd-none']">
-                            <button v-if="item.descriptionItems[0]" class="btn btn-danger btn-remove mr-2" @click="removeEducationDescItem(index)">-</button>
-                            <button class="btn btn-secondary btn-add" @click="addEducationDescItem(index)">+</button>
-                        </div>
+
+                        <EditButtons v-if="isEditable" :showRemoveBtn="item.descriptionItems[0] ? true: false"
+                            buttonType="small"
+                            @removeClicked="removeEducationDescItem(index)"
+                            @addClicked="addEducationDescItem(index)">
+                        </EditButtons>
                     </div>
-                    <div class="btn-wrapper mb-3" :class="[isEditable ? 'd-block' : 'd-none']">
-                        <button v-if="config.education[0]" class="btn btn-danger btn-remove mr-2" @click="removeEducationItem">-</button>
-                        <button class="btn btn-secondary btn-add" @click="addEducationItem">+</button>
-                    </div>
+
+                    <EditButtons v-if="isEditable" :showRemoveBtn="config.education[0] ? true: false"
+                        buttonType="large"
+                        @removeClicked="removeEducationItem"
+                        @addClicked="addEducationItem">
+                   </EditButtons>
+
+            
                 </div>
             </div>
         </div>
@@ -158,10 +175,11 @@
 <script>
 import html2pdf from "html2pdf.js";
 import ContactSection from "./components/ContactSection.vue";
+import EditButtons from "./components/EditButtons.vue";
 
 export default {
   name: 'App',
-  components: { ContactSection },
+  components: { ContactSection, EditButtons },
   data() {
         return {
             config: {
