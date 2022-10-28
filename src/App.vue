@@ -1,7 +1,10 @@
 <template>
   <div class="container my-4" :style="cssVariables">
-        <!-- <button class="btn btn btn-success mb-4" id="export-pdf-btn">Export pdf</button> -->
-        <div class="row main-wrapper">
+        <div class="d-flex justify-content-center">
+            <button class="btn btn btn-success mb-4" @click="exportPdf">Export pdf</button>
+        </div>
+
+        <div class="row main-wrapper" ref="mainWrapper">
             <div class="left-col" :style="{width: widthLeft}">
                 <div class="left-col__personal-wrapper">
                     <div class="img-wrapper mb-4" :class="{'rounded-circle': config.imageShape == 'round'}">
@@ -164,10 +167,10 @@
 </template>
 
 <script>
+import html2pdf from "html2pdf.js";
 
 export default {
   name: 'App',
-  components: {},
   data() {
         return {
             config: {
@@ -175,7 +178,7 @@ export default {
                 secondaryColor: "#F5F5F5",
                 textColor: "#323232",
                 widthLeft: "30",
-                imageUrl: "/media/profile_pic.jpg",
+                imageUrl: "./media/profile_pic.jpg",
                 imageShape: "round",
                 headlineThickness: "400",
                 qualifications: ["dance", "art"],
@@ -352,8 +355,18 @@ export default {
           event.target.classList.add("sidebar-show");
           this.isEditable = true;
       },
-      printExport(){
-          console.log("printExport")
+      exportPdf(){
+        window.scrollTo(0,0)
+        html2pdf(this.$refs.mainWrapper, {
+            margin: 5,
+            filename: "resume.pdf",
+            html2canvas:  { 
+                scale: 1
+            },
+            pagebreak: {mode: ['avoid-all']},
+            enableLinks: true,
+
+		});
       }
   }
 }
