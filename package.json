@@ -14,7 +14,6 @@
   },
   "main": "script.js",
   "dependencies": {
-    "html2pdf.js": "^0.10.1",
     "vue": "^3.2.13",
     "vue-cli": "^2.9.6"
   },
