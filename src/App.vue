@@ -1,7 +1,7 @@
 <template>
   <div class="container my-4" :style="cssVariables">
         <div class="d-flex justify-content-center no-print">
-            <button class="btn btn btn-success mb-4" @click="exportPdf">Export pdf</button>
+            <button class="btn btn btn-secondary mb-4" @click="exportPdf">Export pdf / Print</button>
         </div>
 
         <div class="row main-wrapper" ref="mainWrapper">
@@ -81,7 +81,7 @@
                         @addClicked="addExperience(index)">
                    </EditButtons>
 
-                    <h4 class="mt-4 right-col__section-headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'education')">{{config.headlines.education}}</h4>
+                    <h4 class="mt-5 right-col__section-headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'education')">{{config.headlines.education}}</h4>
                     <div class="card-text" v-for="(item, index) in config.education" :key="index">
                         <h6 class="right-col__sub-headline">
                             <input class="pseudo-text-input w-100" type="text" v-model="config.education[index].title">
@@ -136,7 +136,7 @@
             </label>
 
             <label class="d-flex align-items-center justify-content-start">
-                <select v-model="config.headlineThickness" class="form-control  mr-2" style="width: 120px">
+                <select v-model="config.headlineThickness" class="custom-select  mr-2" style="width: 120px">
                     <option value="300">Thin</option>
                     <option value="400">Medium</option>
                     <option value="600">Thick</option>
@@ -150,7 +150,7 @@
             </label>
 
             <label class="d-flex align-items-center justify-content-start">
-                <select v-model="config.imageShape" class="form-control  mr-2" style="width: 120px">
+                <select v-model="config.imageShape" class="custom-select  mr-2" style="width: 120px">
                     <option value="square">Square</option>
                     <option value="round">Round</option>
                 </select>
@@ -168,7 +168,7 @@
             </label>
         </div>
 
-        <button class="btn btn-block btn-success mt-4" @click="saveConfig">Download configuration</button>
+        <button class="btn btn-block btn-secondary mt-4" @click="saveConfig">Download configuration</button>
     </div>
 </template>
 
@@ -189,7 +189,7 @@ export default {
                 imageUrl: "./media/profile_pic.jpg",
                 imageShape: "round",
                 headlineThickness: "400",
-                qualifications: ["dance", "art"],
+                qualifications: ["Salesforce", "Microsoft Office Suite", "SPSS", "Python"],
                 name: "Moni Mustermann",
                 title: "Senior Marketing Manager",
                 headlines: {
@@ -201,25 +201,54 @@ export default {
                 },
                 experiences: [
                     {
-                        date: "01/2021 – now",
+                        date: "01/2022 – now",
+                        role: "Senior Consultant",
+                        company: "Company AG, London",
+                        descriptionItems: [
+                            "Implemented data models for KPI reporting",
+                            "Conducted user interviews and reports",
+                            "Expanded companies service portfolio"
+                        ],
+                    },
+                    {
+                        date: "01/2021 – 12/2021",
                         role: "Junior Sales Agent",
-                        company: "Amazing Company AG, NYC",
+                        company: "Company AG, NYC",
                         descriptionItems: [
                             "Increased revenue by 300 percent",
                             "Improved customer relations by implementing novel strategies",
                         ],
                     },
+                    {
+                        date: "01/2019 – 06/2019",
+                        role: "Internship Customer Relations",
+                        company: "Company GmbH, Berlin",
+                        descriptionItems: [
+                            "Manages customer relations through CMS",
+                            "Created blog content to increase awareness for products",
+                        ],
+                    }
                 ],
                 education: [
                     {
-                        date: "02/2020 – 08/2020",
-                        institution: "Universität de Barcelona, Spain",
+                        date: "09/2018 – 08/2020",
+                        institution: "Amazing University, Italy",
+                        title: "International Business, Master of Arts",
+                        descriptionItems: [
+                            "Summa cum laude, GPA 1.0",
+                            "Speaker of class",
+                            "Relevant coursework includes: Leadership and Data Science",
+                        ]
+                    },
+                    {
+                        date: "02/2016 – 08/2018",
+                        institution: "University de Barcelona, Spain",
                         title: "Psychology, Bachelor of Science",
                         descriptionItems: [
-                            "summa cum laude, GPA 1.3",
+                            "Summa cum laude, GPA 1.2",
                             "Speaker of class",
                             "Relevant coursework includes: Mastering resume building",
-                        ],
+                        ]
                     },
                 ],
 
@@ -230,15 +259,15 @@ export default {
                 },
                 languages: [
                     {
-                        name: "German",
+                        name: "German, native level",
                         points: 5,
                     },
                     {
-                        name: "English",
+                        name: "English, native level",
                         points: 5,
                     },
                     {
-                        name: "French",
+                        name: "French, intermediate (B1)",
                         points: 3,
                     },
                 ],
@@ -302,7 +331,7 @@ export default {
           this.config.experiences.push({
               date: "from - til",
               role: "Junior Sales Agent",
-              company: "Amazing Company AG, NYC",
+              company: "Company AG, NYC",
               descriptionItems: [
                   "Increased revenue by 300 percent",
                   "Improved customer relations by implementing novel strategies",
@@ -375,18 +404,3 @@ export default {
   }
 }
 </script>
-
-<style>
-    @media print {
-        @page {
-            margin: 0;  /* this affects the margin in the printer settings */
-            padding: 0;
-            size: A4 portrait;
-        }
-
-        .no-print {
-            display: none !important;
-        }
-       
-    }
-</style>

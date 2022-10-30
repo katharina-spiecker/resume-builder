@@ -10,10 +10,13 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "scss-watch" : "sass --watch src/style/base.scss public/style.css",
+    "scss-build" : "sass src/style/base.scss public/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "script.js",
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "vue": "^3.2.13",
     "vue-cli": "^2.9.6"
   },
@@ -24,7 +27,8 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "sass": "^1.55.0"
   },
   "eslintConfig": {
     "root": true,
