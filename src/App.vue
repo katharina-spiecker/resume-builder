@@ -1,14 +1,14 @@
 <template>
   <div class="container my-4" :style="cssVariables">
-        <div class="d-flex justify-content-center no-print">
-            <button class="btn btn btn-secondary mb-4" @click="exportPdf">Export pdf / Print</button>
+        <div class="d-flex justify-content-end no-print">
+            <button class="btn btn btn-primary mb-4" @click="exportPdf">Export pdf / Print</button>
         </div>
 
         <div class="row main-wrapper" ref="mainWrapper">
             <div class="left-col" :style="{width: widthLeft}">
                 <div class="left-col__personal-wrapper">
-                    <div class="img-wrapper mb-4" :class="{'rounded-circle': config.imageShape == 'round'}">
-                        <img :src="config.imageUrl">
+                    <div class="img-wrapper mb-4 d-flex justify-content-center w-100">
+                        <img :src="config.imageUrl" :class="{'rounded-circle': config.imageShape == 'round'}">
                     </div>
                     <h5 class="left-col__headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'personal')">{{config.headlines.personal}}</h5>
                     <ContactSection :contact="config.contact" @contactInfoUpdated="updateContactInfo"/>
@@ -114,7 +114,7 @@
             </div>
         </div>
     </div>
-    <div class="sidebar no-print" :class="{'d-none': hideSidebar}" @mouseenter="sidebarOpen" ref="sidebar">
+    <div class="sidebar no-print bg-primary" @mouseenter="sidebarOpen" ref="sidebar">
         <button class="btn btn-close-sidebar" @click="sidebarClose">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
         </button>
@@ -157,15 +157,16 @@
                 Photo Shape
             </label>
 
-            <label class="p-2 border-radius-2 mb-2">
-                Upload photo
-                <input class="mt-1 form-control-file  mr-2" type="file" accept="image/jpeg, image/png, image/jpg" @change="changeImage">
-            </label>
             
-            <label class="p-2 border-radius-2 mb-0">
-                Upload configuration
-                <input class="mt-1 form-control-file" type="file" accept=".json" @change="useConfig">
-            </label>
+            <button class="btn btn-info btn-block btn-input mb-2">
+                <span class="text-secondary">Upload photo</span>
+                <input type="file" accept="image/jpeg, image/png, image/jpg" @change="changeImage">
+            </button>
+
+            <button class="btn btn-primary btn-block btn-input">
+                <span>Upload configuration</span>
+                <input type="file" accept=".json" @change="useConfig">
+            </button>
         </div>
 
         <button class="btn btn-block btn-secondary mt-4" @click="saveConfig">Download configuration</button>
@@ -185,7 +186,7 @@ export default {
                 primaryColor: "#8C7D69",
                 secondaryColor: "#F5F5F5",
                 textColor: "#323232",
-                widthLeft: "30",
+                widthLeft: "27",
                 imageUrl: "./media/profile_pic.jpg",
                 imageShape: "round",
                 headlineThickness: "400",
@@ -272,8 +273,7 @@ export default {
                     },
                 ],
             },
-            isEditable: false,
-            hideSidebar: false,
+            isEditable: false
         };
   },
   computed: {
@@ -388,9 +388,9 @@ export default {
           this.$refs.sidebar.classList.add("sidebar-hide");
           this.isEditable = false;
       },
-      sidebarOpen() {
-          event.target.classList.remove("sidebar-hide");
-          event.target.classList.add("sidebar-show");
+      sidebarOpen(e) {
+          e.target.classList.remove("sidebar-hide");
+          e.target.classList.add("sidebar-show");
           this.isEditable = true;
       },
       exportPdf(){

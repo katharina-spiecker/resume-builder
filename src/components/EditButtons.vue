@@ -1,7 +1,7 @@
 <template>
     <div class="mb-3" :class="buttonStyle">
         <button v-if="showRemoveBtn" class="btn btn-danger btn-remove mr-2" @click="$emit('removeClicked')">-</button>
-        <button class="btn btn-secondary btn-add" @click="$emit('addClicked')">+</button>
+        <button class="btn btn-primary btn-add" @click="$emit('addClicked')">+</button>
     </div>
 </template>
 
