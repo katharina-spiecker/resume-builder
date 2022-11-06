@@ -119,21 +119,12 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
         </button>
         <div class="sidebar-inner">
-            
-            <label class="d-flex align-items-center">
-                <input type="color" class="mr-2 colorpicker" v-model="config.primaryColor">
-                Primary color
-            </label>
 
-            <label class="d-flex align-items-center">
-                <input type="color" class="mr-2 colorpicker" v-model="config.secondaryColor">
-                Secondary color
-            </label>
+            <ColorInput text="Primary color" :color="config.primaryColor" @update="(newColor) => updateColor(newColor, 'primaryColor')"/>
 
-            <label class="d-flex align-items-center">
-                <input type="color" class="mr-2 colorpicker" v-model="config.textColor">
-                Text color
-            </label>
+            <ColorInput text="Secondary color" :color="config.secondaryColor" @update="(newColor) => updateColor(newColor, 'secondaryColor')"/>
+
+            <ColorInput text="Text color" :color="config.textColor" @update="(newColor) => updateColor(newColor, 'textColor')"/>
 
             <label class="d-flex align-items-center justify-content-start">
                 <select v-model="config.headlineThickness" class="custom-select  mr-2" style="width: 120px">
@@ -176,10 +167,11 @@
 <script>
 import ContactSection from "./components/ContactSection.vue";
 import EditButtons from "./components/EditButtons.vue";
+import ColorInput from "./components/ColorInput.vue";
 
 export default {
   name: 'App',
-  components: { ContactSection, EditButtons },
+  components: { ContactSection, EditButtons, ColorInput },
   data() {
         return {
             config: {
@@ -400,6 +392,9 @@ export default {
       },
       updateContactInfo(data){
         this.config.contact[data.key] = data.newValue;
+      },
+      updateColor(newColor, key){
+        this.config[key] = newColor;
       }
   }
 }
