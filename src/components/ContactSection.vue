@@ -17,7 +17,9 @@
 <script>    
 export default {
   name: 'ContactSection',
-  props: ["contact"],
+  props: {
+    contact: Object
+  },
   emits: ["contactInfoUpdated"],
   methods: {
     onUpdateContactInfo(e, key){

@@ -6,9 +6,13 @@
 </template>
 
 <script>
+
     export default {
         name: 'EditButtons',
-        props: ["showRemoveBtn", "buttonType"],
+        props: {
+            showRemoveBtn: Boolean,
+            buttonType: String
+        },
         computed: {
             buttonStyle(){
                 return this.buttonType == 'small' ? 'btn-wrapper-small' : 'btn-wrapper';
