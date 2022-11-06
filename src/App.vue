@@ -120,34 +120,26 @@
         </button>
         <div class="sidebar-inner">
 
-            <ColorInput text="Primary color" :color="config.primaryColor" @update="(newColor) => updateColor(newColor, 'primaryColor')"/>
+            <ColorInput text="Primary color" :color="config.primaryColor" @update="(newValue) => updateConfig(newValue, 'primaryColor')"/>
 
-            <ColorInput text="Secondary color" :color="config.secondaryColor" @update="(newColor) => updateColor(newColor, 'secondaryColor')"/>
+            <ColorInput text="Secondary color" :color="config.secondaryColor" @update="(newValue) => updateConfig(newValue, 'secondaryColor')"/>
 
-            <ColorInput text="Text color" :color="config.textColor" @update="(newColor) => updateColor(newColor, 'textColor')"/>
+            <ColorInput text="Text color" :color="config.textColor" @update="(newValue) => updateConfig(newValue, 'textColor')"/>
 
-            <label class="d-flex align-items-center justify-content-start">
-                <select v-model="config.headlineThickness" class="custom-select  mr-2" style="width: 120px">
-                    <option value="300">Thin</option>
-                    <option value="400">Medium</option>
-                    <option value="600">Thick</option>
-                </select>
-                Headline thickness
-            </label>
+            <SelectInput text="Headline thickness"
+                        :selectedOption="config.headlineThickness"
+                        :options="[{'name': 'Thin', 'value': '300'}, {'name': 'Medium', 'value': '400'}, {'name': 'Thick', 'value': '600'}]"
+                        @update="(newValue) => updateConfig(newValue, 'headlineThickness')"/>
+
+            <SelectInput text="Photo Shape"
+                        :options="[{'name': 'Square', 'value': 'square'}, {'name': 'Round','value': 'round'}]"
+                        :selectedOption="config.imageShape"
+                        @update="(newValue) => updateConfig(newValue, 'imageShape')"/>
 
             <label class="d-flex align-items-center">
                 <input type="number" min="20" max="80" class="form-control mr-2" style="width:120px;" v-model="config.widthLeft">
                 % Width left column
             </label>
-
-            <label class="d-flex align-items-center justify-content-start">
-                <select v-model="config.imageShape" class="custom-select  mr-2" style="width: 120px">
-                    <option value="square">Square</option>
-                    <option value="round">Round</option>
-                </select>
-                Photo Shape
-            </label>
-
             
             <button class="btn btn-info btn-block btn-input mb-2">
                 <span class="text-secondary">Upload photo</span>
@@ -168,10 +160,11 @@
 import ContactSection from "./components/ContactSection.vue";
 import EditButtons from "./components/EditButtons.vue";
 import ColorInput from "./components/ColorInput.vue";
+import SelectInput from "./components/SelectInput.vue";
 
 export default {
   name: 'App',
-  components: { ContactSection, EditButtons, ColorInput },
+  components: { ContactSection, EditButtons, ColorInput, SelectInput },
   data() {
         return {
             config: {
@@ -393,8 +386,8 @@ export default {
       updateContactInfo(data){
         this.config.contact[data.key] = data.newValue;
       },
-      updateColor(newColor, key){
-        this.config[key] = newColor;
+      updateConfig(newValue, key){
+        this.config[key] = newValue;
       }
   }
 }
