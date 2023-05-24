@@ -54,6 +54,13 @@
                 </h5>
                 <div>
                     <h4 class="right-col__section-headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'experience')">{{config.headlines.experience}}</h4>
+                    
+                    <EditButtons v-if="isEditable" :showRemoveBtn="config.experiences[0] ? true: false"
+                        buttonType="large"
+                        @removeClicked="generalRemove('experiences', false)"
+                        @addClicked="addExperience(false)">
+                   </EditButtons>
+
                     <div class="card-text" v-for="(experience, index) in config.experiences" :key="index">
                         <h6 class="right-col__sub-headline">
                             <input class="pseudo-text-input w-100" type="text" v-model="config.experiences[index].role">
@@ -62,6 +69,7 @@
                             <input class="pseudo-text-input w-50" type="text" v-model="config.experiences[index].company">
                             <input class="pseudo-text-input ml-auto w-50 text-right" type="text" v-model="config.experiences[index].date">
                         </div>
+
                         <ul>
                             <li v-for="(item, i) in experience.descriptionItems" :key="i">
                                 <input class="pseudo-text-input w-100" type="text" v-model="config.experiences[index].descriptionItems[i]">
@@ -78,10 +86,17 @@
                     <EditButtons v-if="isEditable" :showRemoveBtn="config.experiences[0] ? true: false"
                         buttonType="large"
                         @removeClicked="generalRemove('experiences')"
-                        @addClicked="addExperience(index)">
+                        @addClicked="addExperience">
                    </EditButtons>
 
                     <h4 class="mt-5 right-col__section-headline" contenteditable="true" @blur="onFinishEditHeadline($event, 'education')">{{config.headlines.education}}</h4>
+                    
+                    <EditButtons v-if="isEditable" :showRemoveBtn="config.education[0] ? true: false"
+                        buttonType="large"
+                        @removeClicked="removeEducationItem(false)"
+                        @addClicked="addEducationItem(false)">
+                   </EditButtons>
+                   
                     <div class="card-text" v-for="(item, index) in config.education" :key="index">
                         <h6 class="right-col__sub-headline">
                             <input class="pseudo-text-input w-100" type="text" v-model="config.education[index].title">
@@ -288,40 +303,69 @@ export default {
           this.config.education[index].descriptionItems.pop();
       },
       addEducationDescItem(index) {
-          this.config.education[index].descriptionItems.push("neuer Eintrag");
+          this.config.education[index].descriptionItems.push("new entry");
       },
-      removeExperienceItem(index) {
+      removeExperienceItem(index, fromEnd=true) {
+        if(fromEnd) {
           this.config.experiences[index].descriptionItems.pop();
+        } else {
+            // remove from beginning
+            this.config.experiences[index].descriptionItems.shift();
+        }
       },
-      addExperienceItem(index) {
-          this.config.experiences[index].descriptionItems.push(
-              "neuer Eintrag"
-          );
+      addExperienceItem(index, fromEnd=true) {
+        if(fromEnd) {
+            this.config.experiences[index].descriptionItems.push(
+                "new entry"
+            );
+        } else {
+            this.config.experiences[index].descriptionItems.unshift(
+                // add to beginning
+                "new entry"
+            );
+        }
       },
-      removeEducationItem() {
-          this.config.education.pop();
+      removeEducationItem(fromEnd=true) {
+        if(fromEnd) {
+            this.config.education.pop();
+        } else {
+            // remove from beginning
+            this.config.education.shift();
+        }
       },
-      addEducationItem() {
-          this.config.education.push({
-              date: "Spain, 02/2021 – 08/2023",
-              institution: "University of Barcelona",
-              title: "Psychology, Master of Science",
-              descriptionItems: [
-                  "cum laude, GPA 1.5",
-                  "Relevant coursework includes: Mastering resume building",
-              ],
-          });
+      addEducationItem(fromEnd=true) {
+        const placeholder = {
+            date: "Spain, 02/2021 – 08/2023",
+            institution: "University of Barcelona",
+            title: "Psychology, Master of Science",
+            descriptionItems: [
+                "cum laude, GPA 1.5",
+                "Relevant coursework includes: Mastering resume building",
+            ]
+        }
+        if(fromEnd) {
+            this.config.education.push(placeholder);
+        } else {
+            // add to beginning
+            this.config.education.unshift(placeholder);
+        }
       },
-      addExperience() {
-          this.config.experiences.push({
-              date: "from - til",
-              role: "Junior Sales Agent",
-              company: "Company AG, NYC",
-              descriptionItems: [
-                  "Increased revenue by 300 percent",
-                  "Improved customer relations by implementing novel strategies",
-              ],
-          });
+      addExperience(fromEnd=true) {
+        const placeholder = {
+            date: "from - til",
+            role: "Junior Sales Agent",
+            company: "Company AG, NYC",
+            descriptionItems: [
+                "Increased revenue by 300 percent",
+                "Improved customer relations by implementing novel strategies",
+            ]
+        }
+        if(fromEnd) {
+            this.config.experiences.push(placeholder);
+        } else {
+            // add to beginning
+            this.config.experiences.unshift(placeholder);
+        }
       },
       addLanguage() {
           this.config.languages.push({
@@ -329,8 +373,13 @@ export default {
               points: 5,
           });
       },
-      generalRemove(name) {
-          this.config[name].pop();
+      generalRemove(name, fromEnd=true) {
+        if (fromEnd) {
+            this.config[name].pop();
+        } else {
+            // remove from beginning
+            this.config[name].shift();
+        }
       },
       saveConfig() {
           const data = JSON.stringify(this.config);
