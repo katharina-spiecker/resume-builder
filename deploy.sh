@@ -10,7 +10,7 @@ npm run build
 cd dist
 
 # if you are deploying to a custom domain
-# echo 'www.example.com' > CNAME
+echo 'resumeonline.app' > CNAME
 
 git init
 git add -A
@@ -18,4 +18,5 @@ git commit -m 'deploy'
 
 git push -f git@github.com:katharina-spiecker/resume-builder.git main:gh-pages
 
+# go back to previous directory
 cd -

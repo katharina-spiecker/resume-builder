@@ -1,4 +1,4 @@
-## Build your resume with ease!
+## Build your resume with ease with this Vue resume maker.
 ### [Try it out](https://katharina-spiecker.github.io/resume-builder/)
 
 - Frontend App build with Vue.js
