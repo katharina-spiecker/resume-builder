@@ -1,31 +1,41 @@
 <template>
-    <label class="d-flex align-items-center">
-        <input type="color" class="colorpicker mr-2" v-model="localColor">
-        {{text}}
+    <label>
+        <input type="color"
+            class="color-picker"
+            @input="$emit('colorChanged', $event.target.value)"
+            :value="defaultColor"
+        >
+        {{ label }}
     </label>
 </template>
 
-<!-- config.primaryColor -->
-<!-- config.secondaryColor -->
-<!-- config.textColor -->
 <script>
 export default {
-    name: "ColorInput",
     props: {
-        text: String,
-        color: String
-    },
-    emits: ["update"],
-    data() {
-        return {
-            localColor: this.color
-        }
-    },
-    watch: {
-        localColor(event){
-            this.$emit('update', event)
+        label: {
+            type: String,
+            default: "Choose a color"
+        },
+        defaultColor: {
+            type: String
         }
     }
-
 }
 </script>
+
+
+<style scoped>
+    label {
+        display: flex;
+        align-items: center;
+    }
+    .color-picker {
+        margin-right: 10px;
+        /* offset strange height, width difference */
+        width: 26px;
+        height: 30px;
+        padding: 0;
+        border: none;
+        background: transparent;
+    }
+</style>

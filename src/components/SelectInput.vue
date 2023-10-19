@@ -1,31 +1,40 @@
 <template>
-    <label class="d-flex align-items-center justify-content-start">
-        <select v-model="localValue" class="custom-select  mr-2" style="width: 120px">
-            <option v-for="option in options" :value="option.value" :key="option.name">{{option.name}}</option>
+    <label>
+        <select class="custom-input" @change="$emit('updateSelection', $event.target.value)">
+            <option
+                v-for="option in options"
+                :value="option.value"
+                :key="option.value"
+                :selected="defaultOption == option.value">
+                {{ option.name }}
+            </option>
         </select>
-        {{text}}
+        {{ label }}
     </label>
 </template>
 
 <script>
     export default {
-        name: "SelectInput",
         props: {
-            text: String,
-            selectedOption: String,
-            options: Array
-        },
-        emits: [],
-        data(){
-            return {
-                localValue: this.selectedOption
-            }
-        },
-        watch: {
-            localValue(newValue){
-                this.$emit("update", newValue);
-            }
+            label: String,
+            options: Array,
+            defaultOption: String
         }
-        
     }
 </script>
+
+<style scoped>
+    label {
+        display: flex;
+        align-items: center;
+    }
+
+    select {
+        display: inline-block;
+        min-width: 80px;
+        padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+        background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat;
+        appearance: none;
+        margin-right: 8px;
+    }
+</style>
