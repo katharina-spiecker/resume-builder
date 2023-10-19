@@ -5,7 +5,7 @@
             <span v-if="offLabel" style="margin-right:10px">{{ offLabel }}</span>
             
             <div class="switch">
-                <input type="checkbox" @click="onToggle" checked>
+                <input type="checkbox" @click="onToggle" :checked="toggleActive">
                 <span class="slider"></span>
             </div>
 
@@ -21,6 +21,10 @@ export default {
         offLabel: {
             type: String,
             default: null
+        },
+        toggleActive: {
+            type: Boolean,
+            default: true
         }
     },
     methods: {

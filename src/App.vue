@@ -1,7 +1,7 @@
 <template>
   <main class="container">
     <Sidebar>
-      <ToggleSwitch @switch-toggled="toggleEditMode" label="Edit mode" off-label="Export mode"/>
+      <ToggleSwitch @switch-toggled="toggleEditMode" label="Edit mode" off-label="Export mode" :toggle-active="editing"/>
 
       <div class="sidebar-section" v-if="editing">
         <p>Left column</p>
@@ -63,7 +63,7 @@
       />
 
       <div class="sidebar-section" v-if="editing">
-        <ToggleSwitch @switch-toggled="toggleImageDisplay" label="Show photo"/>
+        <ToggleSwitch @switch-toggled="toggleImageDisplay" label="Show photo" :toggle-active="showImage"/>
 
         <CustomButton v-if="showImage">
           <ImgUpload
