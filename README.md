@@ -1,4 +1,4 @@
-## Build your resume with ease - No more struggling with Microsoft Word resumes!
+## Build your resume with ease!
 ### [Try it out](https://katharina-spiecker.github.io/resume-builder/)
 
 - Frontend App build with Vue.js
