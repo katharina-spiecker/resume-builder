@@ -15,7 +15,7 @@
         },
         methods: {
             notifyParent(event) {
-                this.$emit("headlineEdited", event.target.innerText.toLowerCase());
+                this.$emit("headlineEdited", event.target.innerText);
             }
         }
     }
@@ -25,7 +25,6 @@
 <style scoped>
     .section-headline {
         font-size: 20px;
-        text-transform: uppercase;
         font-weight: var(--headline-weight);
         margin-bottom: 15px;
         margin-top: 0;

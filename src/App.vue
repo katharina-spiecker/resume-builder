@@ -45,22 +45,24 @@
         />
       </div>
 
-      <SelectInput
-        v-if="editing"
-        label="Headline thickness"
-        :options="[{'name': 'Thin', 'value': '300'}, {'name': 'Medium', 'value': '400'}, {'name': 'Thick', 'value': '600'}]"
-        :default-option="headlineWeight"
-        @update-selection="headlineWeight = $event"
-      />
+      <div class="sidebar-section" v-if="editing">
+        <SelectInput
+          v-if="editing"
+          label="Headline thickness"
+          :options="[{'name': 'Thin', 'value': '300'}, {'name': 'Medium', 'value': '400'}, {'name': 'Thick', 'value': '600'}]"
+          :default-option="headlineWeight"
+          @update-selection="headlineWeight = $event"
+        />
 
-      <PercentageInput
-        v-if="editing"
-        label="Width left column"
-        :min="20"
-        :max="80"
-        :current-value="widthLeft"
-        @percentage-changed="widthLeft = $event"
-      />
+        <PercentageInput
+          v-if="editing"
+          label="Width left column"
+          :min="20"
+          :max="80"
+          :current-value="widthLeft"
+          @percentage-changed="widthLeft = $event"
+        />
+      </div>
 
       <div class="sidebar-section" v-if="editing">
         <ToggleSwitch @switch-toggled="toggleImageDisplay" label="Show photo" :toggle-active="showImage"/>
