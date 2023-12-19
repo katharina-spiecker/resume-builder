@@ -26,7 +26,6 @@ export default {
   width: 160px;
   height: 160px;
   border: 5px solid var(--highlight-color-left);
-  background-color: var(--highlight-color-left);;
   margin-bottom: 20px;
   object-fit: cover;
   margin-left: auto;
