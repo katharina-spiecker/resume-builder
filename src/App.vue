@@ -140,7 +140,7 @@
               @headline-edited="updateHeadline($event, 0)" />
             <p
               :contenteditable="editing"
-              @input="updateProperty($event, 'introText')">
+              @blur="updateProperty($event, 'introText')">
               {{ introText }}
             </p>
           </ResumeSection>
@@ -167,7 +167,7 @@
                 v-for="(skill, index) in skills"
                 :key="index"
                 :contenteditable="editing"
-                @input="updateNestedProperty($event, 'skills', index)">
+                @blur="updateNestedProperty($event, 'skills', index)">
                 {{ skill }}
               </li>
             </ul>
@@ -187,7 +187,7 @@
                 v-for="(highlight, index) in highlights"
                 :key="index"
                 :contenteditable="editing"
-                @input="updateNestedProperty($event, 'highlights', index)">
+                @blur="updateNestedProperty($event, 'highlights', index)">
                 {{ highlight }}
               </li>
             </ul>
@@ -202,13 +202,13 @@
           <div
             class="personal-name"
             :contenteditable="editing"
-            @input="updateProperty($event, 'name')">
+            @blur="updateProperty($event, 'name')">
             {{ name }}
           </div>
           <div
             class="personal-title"
             :contenteditable="editing"
-            @input="updateProperty($event, 'title')">
+            @blur="updateProperty($event, 'title')">
             {{ title }}
           </div>
 

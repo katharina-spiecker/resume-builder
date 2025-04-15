@@ -4,7 +4,7 @@
       <div
         class="resumeentry-title"
         :contenteditable="editing"
-        @input="$emit('edit', $event, 'title')"
+        @blur="$emit('edit', $event, 'title')"
       >
         {{ item.title }}
       </div>
@@ -14,13 +14,13 @@
       <div class="resumeentry-location">
         <span
           :contenteditable="editing"
-          @input="$emit('edit', $event, isEducation ? 'university' : 'company')"
+          @blur="$emit('edit', $event, isEducation ? 'university' : 'company')"
         >
           {{ isEducation ? item.university : item.company }} </span
         >,
         <span
           :contenteditable="editing"
-          @input="$emit('edit', $event, 'location')"
+          @blur="$emit('edit', $event, 'location')"
         >
           {{ item.location }}
         </span>
@@ -28,7 +28,7 @@
       <div
         class="resumeentry-date"
         :contenteditable="editing"
-        @input="$emit('edit', $event, 'date')"
+        @blur="$emit('edit', $event, 'date')"
       >
         {{ item.date }}
       </div>
@@ -38,7 +38,7 @@
         v-for="(desc, index) in item.description"
         :key="index"
         :contenteditable="editing"
-        @input="$emit('editDesc', $event, index)"
+        @blur="$emit('editDesc', $event, index)"
       >
         {{ desc }}
       </li>

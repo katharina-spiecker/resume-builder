@@ -13,7 +13,7 @@
 
       <span
         :contenteditable="editing"
-        @input="$emit('edit', $event, 'contact', 'phone')"
+        @blur="$emit('edit', $event, 'contact', 'phone')"
         >{{ contact.phone }}</span
       >
     </li>
@@ -30,7 +30,7 @@
       </svg>
       <span
         :contenteditable="editing"
-        @input="$emit('edit', $event, 'contact', 'email')"
+        @blur="$emit('edit', $event, 'contact', 'email')"
         >{{ contact.email }}</span
       >
     </li>
@@ -47,7 +47,7 @@
       </svg>
       <span
         :contenteditable="editing"
-        @input="$emit('edit', $event, 'contact', 'address')"
+        @blur="$emit('edit', $event, 'contact', 'address')"
         >{{ contact.address }}</span
       >
     </li>

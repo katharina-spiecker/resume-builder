@@ -1,5 +1,5 @@
 <template>
-    <h4 class="section-headline" :contenteditable="editing" @input="notifyParent">{{ headline }}</h4>
+    <h4 class="section-headline" :contenteditable="editing" @blur="notifyParent">{{ headline }}</h4>
 </template>
 
 <script>
